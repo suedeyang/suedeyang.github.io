@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>safari無法開啟上網飆暑假作業</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+        }
+        .popup-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100vw;
+        }
+        .popup-img {
+            width: 200px;
+            max-width: 80vw;
+            height: auto;
+            animation: popIn 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes popIn {
+            0% {
+                transform: scale(0.2);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(0.95);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @media (max-width: 600px) {
+            .popup-img {
+                width: 70vw;
+                border-radius: 12px;
+            }
+        }
+        .reminder-text {
+            margin-top: 18px;
+            color: #888;
+            font-size: 1.6em;
+            text-align: center;
+            letter-spacing: 1px;
+            padding-top: 2em;
+        }
+        .countdown {
+            margin-top: 10px;
+            color: #c00;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        // Safari偵測與自動跳轉
+        window.onload = function() {
+            // 判斷是否為Safari（排除Chrome等WebKit瀏覽器）
+            var ua = navigator.userAgent;
+            var isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+
+            if (!isSafari) {
+                // 不是Safari，直接跳轉
+                window.location.href = "https://netholiday.kh.edu.tw/";
+                return;
+            }
+
+            // Safari才執行倒數
+            let seconds = 10;
+            const countdownEl = document.getElementById('countdown');
+            countdownEl.textContent = `處理中 (${seconds})`;
+            const timer = setInterval(() => {
+                seconds--;
+                countdownEl.textContent = `即將開啟上網飆暑假作業 (${seconds})`;
+                if (seconds === 0) {
+                    clearInterval(timer);
+                    window.location.href = "https://netholiday.kh.edu.tw/";
+                }
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+    <div class="popup-container">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img 
+                class="popup-img"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/800px-Google_Chrome_icon_%28February_2022%29.svg.png"
+                alt="Chrome Icon">
+            <div class="reminder-text">如果您的Safari瀏覽器不能開啟上網飆暑假作業 請改用Chrome瀏覽器闖關</div>
+            <div class="countdown" id="countdown"></div>
+        </div>
+    </div>
+</body>
+</html>
