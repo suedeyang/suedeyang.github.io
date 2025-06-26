@@ -67,8 +67,14 @@
     <script>
         // Safari偵測與自動跳轉
         window.onload = function() {
+            // 顯示目前瀏覽器型號
+            const ua = navigator.userAgent;
+            const browserInfoEl = document.getElementById('browser-info');
+            if (browserInfoEl) {
+                browserInfoEl.textContent = `目前瀏覽器：${ua}`;
+            }
+
             // 判斷是否為Safari（排除Chrome等WebKit瀏覽器）
-            var ua = navigator.userAgent;
             var isSafari = /^((?!chrome|android).)*safari/i.test(ua);
 
             if (!isSafari) {
@@ -99,7 +105,8 @@
                 class="popup-img"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/800px-Google_Chrome_icon_%28February_2022%29.svg.png"
                 alt="Chrome Icon">
-            <div class="reminder-text">如果您的Safari不能開啟上網飆暑假作業 請改用Chrome等其他瀏覽器</div>
+            <div class="reminder-text">如果等一下Safari開啟「上網飆暑假作業」的時候卡住 請改用Chrome或其他瀏覽器</div>
+            <div id="browser-info" style="color:#555;font-size:1em;margin-top:8px;"></div>
             <div class="countdown" id="countdown"></div>
         </div>
     </div>
